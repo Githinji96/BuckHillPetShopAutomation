@@ -9,6 +9,10 @@
   "author": "Bonface Githinji",
   "license": "ISC",
   "dependencies": {
+    "D": "^1.0.0",
     "cypress": "^12.7.0"
+  },
+  "devDependencies": {
+    "cypress-xpath": "^2.0.1"
   }
 }

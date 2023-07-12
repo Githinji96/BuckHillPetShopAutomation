@@ -7,10 +7,11 @@
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
-//
+
 //
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
+//user interface login commands
 Cypress.Commands.add('login', () => {
     cy.visit('https://pet-shop.buckhill.com.hr/')
 
@@ -21,6 +22,14 @@ Cypress.Commands.add('login', () => {
     cy.get('.login__form > .v-btn').click()
     cy.url().should('eq','https://pet-shop.buckhill.com.hr/')
 });
+   //custom command for admin login
+ Cypress.Commands.add('adminLogin',()=>{
+    cy.visit('https://pet-shop.buckhill.com.hr/login')
+    cy.get('#input-0').type('admin@buckhill.co.uk')
+    cy.get('#input-2').type('admin')
+    cy.get('.v-btn').click()
+        
+ })
 //
 // -- This is a child command --
 // Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })

@@ -2,10 +2,11 @@
 
 describe('User journey test', () => {
   before(() => {
-    cy.login(); // Call the custom login command
+    // Call the custom login command
+    cy.login(); 
   });
-  //display of item and prices
-  it.skip('display of items on home page', () => {
+  //display items and prices
+  it('display of items on home page', () => {
   
     cy.get('.v-slide-group__content')
         .each((product, index) => {
@@ -31,8 +32,8 @@ describe('User journey test', () => {
             
     })
 
-    //The script randomly chooses and clicks an item
-    it.only('add a single product to cart',()=>{
+    //The script randomly chooses and add to cart an item
+    it('add a single product to cart',()=>{
      
            cy.get('.product-card__title').then(($el) => {
 
@@ -78,7 +79,7 @@ describe('User journey test', () => {
                   cy.get('#checkbox-99').click()
                   cy.get('.primary500').click()
 
-                //Place order
+                //Place an order
                 cy.get('.action-btns > .v-btn').click()
         })
     })

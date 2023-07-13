@@ -1,7 +1,7 @@
 
 
 describe('User journey test', () => {
-  before(() => {
+  beforeEach(() => {
     // Call the custom login command
     cy.login(); 
   });
@@ -28,11 +28,39 @@ describe('User journey test', () => {
         });
     });
     
-    it('filter products on lowest price first' ,()=>{
-            
+    it('Filter products based on brands' ,()=>{
+       //click the product category
+      cy.get(':nth-child(3) > .section-title').click()
+      cy.get(':nth-child(2) > .accordion__body > ul > :nth-child(4)').click()
+      cy.get('.product-card__title').each(($product) => {
+      const productName = $product.text();
+      cy.log(productName);
+              
+       //assert the presence of a product based on its name
+        const expectedProductName = 'Purina Tidy Cats Clumping Cat Litter';
+        cy.get('.product-card__title').should('contain', expectedProductName);
+      });
     })
 
-    //The script randomly chooses and add to cart an item
+      //Filter the products based on the category
+    it.only('Filter products based on Category',()=>{
+        cy.get(':nth-child(3) > .section-title').click({force: true})
+        cy.wait(1000)
+        cy.get(':nth-child(3) > .accordion__body > ul > :nth-child(2)').click()
+
+        cy.get('.product-card__title').each(($product, index) => {
+          cy.wrap($product).invoke('text').then((productName) => {
+            cy.log(`Product ${index + 1}: ${productName}`);//print all products
+            expect(productName).to.not.be.empty; // Assertion to check product name is not empty
+    
+          });
+        });
+        
+      })
+      
+    })
+
+    //The script randomly add to cart an item
     it('add a single product to cart',()=>{
      
            cy.get('.product-card__title').then(($el) => {
@@ -45,8 +73,14 @@ describe('User journey test', () => {
                 cy.get('.v-toolbar__content > .v-container > :nth-child(3) > :nth-child(1)').
                 should('have.text', ' Cart (1) ').click()
 
+                //verify the cart page
+                cy.url().should('eq','https://pet-shop.buckhill.com.hr/cart')
+
                 //proceed to checkout
                cy.get('.v-btn--elevated').should('have.text', ' Proceed to checkout ').click()
+
+               //Verify the checkout page
+               cy.url().should('eq','https://pet-shop.buckhill.com.hr/checkout')
                 // Assert checkout page
                cy.contains('Checkout')
                .should('be.visible')
@@ -79,8 +113,13 @@ describe('User journey test', () => {
                   cy.get('#checkbox-99').click()
                   cy.get('.primary500').click()
 
+                  // Review your order page
+                  cy.url().should('eq','https://pet-shop.buckhill.com.hr/checkout')
+                  cy.get('h3.text-h6').should('have.text','Review your order')
+
                 //Place an order
                 cy.get('.action-btns > .v-btn').click()
         })
     })
-  })
+ 
+

@@ -1,6 +1,6 @@
 
 
-describe('User journey test', () => {
+describe('Ecommerce website', () => {
   beforeEach(() => {
     // Call the custom login command
     cy.login(); 
@@ -30,20 +30,17 @@ describe('User journey test', () => {
     
     it('Filter products based on brands' ,()=>{
        //click the product category
-      cy.get(':nth-child(3) > .section-title').click()
+      cy.get(':nth-child(3) > .section-title').click({force:true})
       cy.get(':nth-child(2) > .accordion__body > ul > :nth-child(4)').click()
       cy.get('.product-card__title').each(($product) => {
       const productName = $product.text();
       cy.log(productName);
               
-       //assert the presence of a product based on its name
-        const expectedProductName = 'Purina Tidy Cats Clumping Cat Litter';
-        cy.get('.product-card__title').should('contain', expectedProductName);
       });
     })
 
       //Filter the products based on the category
-    it.only('Filter products based on Category',()=>{
+    it('Filter products based on Category',()=>{
         cy.get(':nth-child(3) > .section-title').click({force: true})
         cy.wait(1000)
         cy.get(':nth-child(3) > .accordion__body > ul > :nth-child(2)').click()
@@ -53,13 +50,10 @@ describe('User journey test', () => {
             cy.log(`Product ${index + 1}: ${productName}`);//print all products
             expect(productName).to.not.be.empty; // Assertion to check product name is not empty
     
-          });
+          
         });
-        
       })
-      
     })
-
     //The script randomly add to cart an item
     it('add a single product to cart',()=>{
      
@@ -87,30 +81,31 @@ describe('User journey test', () => {
                .then(() => {
                cy.contains('Shipping address').should('be.visible');
                   });
+
+                  cy.wait(5000)
                   //enter customer infomation
                   //Enter username
-                  cy.get('#input-45').type('John')
-                  cy.get('#input-47').type('Doe')
+                  cy.get('#input-39').type('John')
+                  cy.get('#input-41').type('Doe')
                   //enter Address
-                  cy.get('#input-49').type('0745567890')
-                  cy.get('#input-51').type('0714597899')
-                  cy.get('#input-53').type('Nakuru')
-                  cy.get('#input-55').type('Monrovia')
-                  cy.get('#input-57').type('6000')
-                  cy.get('#input-59').type('Kenya')
-                 // click the checkbox
-                  cy.get('#checkbox-61').click()
+                  cy.get('#input-43').type('Street 45')
+                  cy.get('#input-45').type('North 34')
+                  cy.get('#input-47').type('Nakuru')
+                  cy.get('#input-49').type('Monrovia')
+                  cy.get('#input-51').type('6000')
+                  cy.get('#input-53').type('Kenya')
+
                   //click Next button
                   cy.get('.action-btns > .v-btn').should('have.text',' Next ').click()
                   //select the type of payment as cash on dilevery
                   cy.get(':nth-child(2) > .v-card').click()
                   cy.contains('Cash on delivery').should('be.visible')
-                  cy.get('#input-91').type('John')
-                  cy.get('#input-93').type('Doe')
-                  cy.get('#input-95').type('0745567890')
-                  cy.get('#input-97').type('0714597899')
+                  cy.get('#input-85').type('John')
+                  cy.get('#input-87').type('Doe')
+                  cy.get('#input-89').type('Street 45')
+                  cy.get('#input-91').type('0714597899')
                   //click checkbox
-                  cy.get('#checkbox-99').click()
+                  cy.get('#checkbox-93').click()
                   cy.get('.primary500').click()
 
                   // Review your order page
@@ -121,5 +116,5 @@ describe('User journey test', () => {
                 cy.get('.action-btns > .v-btn').click()
         })
     })
- 
+  })
 

@@ -4,24 +4,9 @@ describe('Test Product dashboard', () => {
         cy.adminLogin();
         // cy.intercept({ resourceType: /xhr|fetch/},{ log: false});
     });
-
-    xit('Review products in the dashboard', () => {
-        cy.get(':nth-child(4) > :nth-child(1) > a > .v-list-item > .v-list-item__content > .v-list-item-title').should('have.text', 'Products').click()
-        // Assert that the product table exists
-        cy.get('.v-table__wrapper').should('exist');
-
-        // Get all product rows in the table
-        cy.get('.products > :nth-child(3)').each(($row, index, $rows) => {
-            cy.wrap($row).within(() => {
-                cy.get('td').each(function ($cellData, index, $columns) {
-                    cy.log($cellData.text())
-                })
-
-            });
-        });
-    })
+   
     //get the product brand of the 4th row
-    xit('Get a single row data', () => {
+    it('Get a single row data', () => {
         cy.get(':nth-child(4) > :nth-child(1) > a > .v-list-item > .v-list-item__content > .v-list-item-title').should('have.text', 'Products').click()
         cy.get(':nth-child(5) > :nth-child(3)').each(($cell) => {
             const cellValue = $cell.text();
@@ -31,7 +16,7 @@ describe('Test Product dashboard', () => {
 
     })
     //Edit a product information in a table
-    xit('Edit a product information in a table', () => {
+    it('Edit a product information in a table', () => {
         cy.get(':nth-child(4) > :nth-child(1) > a > .v-list-item > .v-list-item__content > .v-list-item-title').should('have.text', 'Products').click()
         cy.window().then((win) => {
             cy.stub(win, 'prompt').returns('welcome');
@@ -47,18 +32,18 @@ describe('Test Product dashboard', () => {
         cy.get('body > div.v-overlay-container > div > div.v-overlay__content > div > div > div > div > div.v-col.v-col-8 > div > div:nth-child(1) > div > div > div > div.v-field__append-inner > i').click()
         cy.get('body > div.v-overlay-container > div.v-overlay.v-overlay--absolute.v-overlay--active.v-theme--PetGreen.v-locale--is-ltr.v-menu > div > div > div:nth-child(2) > div.v-list-item__content > div').click()
         //Edit product name
-        cy.get('body > div.v-overlay-container > div.v-overlay.v-overlay--active.v-theme--PetGreen.v-locale--is-ltr.v-dialog.v-overlay--scroll-blocked > div.v-overlay__content > div > div > div > div > div.v-col.v-col-8 > div > div:nth-child(2) > div > div > div')
+        cy.get('#input-33')
             .clear().type('PetSafe')
         //Edit product price
         cy.get('body > div.v-overlay-container > div > div.v-overlay__content > div > div > div > div > div.v-col.v-col-8 > div > div:nth-child(4) > div > div > div')
             .clear().type('45.00')
         ///clear product description
-        cy.get('#input-43').clear().type('The product is fantastic. I recommend the purchase')
+        cy.get('body > div.v-overlay-container > div > div.v-overlay__content > div > div > div > div > div.v-col.v-col-8 > div > div.v-col.v-col-12.h-100 > div > div > div > div').clear().type('The product is fantastic. I recommend the purchase')
         //Save the changes
         cy.get('body > div.v-overlay-container > div > div.v-overlay__content > div > div > div > div > div:nth-child(4) > div > button > span.v-btn__overlay').click({ force: true })
 
     })
-    xit('Delete a product in a table ', () => {
+    it('Delete a product in a table ', () => {
         cy.get(':nth-child(4) > :nth-child(1) > a > .v-list-item > .v-list-item__content > .v-list-item-title').should('have.text', 'Products').click()
         cy.get(':nth-child(3) > :nth-child(6)').click()
         cy.get(':nth-child(4) > :nth-child(6) > .d-flex> :nth-child(1)').click()
@@ -67,7 +52,7 @@ describe('Test Product dashboard', () => {
 
 
     })
-    xit('Test all data in a table', () => {
+    it('Test all data in a table', () => {
         cy.get(':nth-child(4) > :nth-child(1) > a > .v-list-item > .v-list-item__content > .v-list-item-title').should('have.text', 'Products').click()
         cy.wait(5000)
         cy.get('tbody>tr').each(($row) => {
@@ -78,7 +63,7 @@ describe('Test Product dashboard', () => {
         });
 
     })
-    it.only('Print all product names', () => {
+    it('Print all product names', () => {
         cy.get(':nth-child(4) > :nth-child(1) > a > .v-list-item > .v-list-item__content > .v-list-item-title').should('have.text', 'Products').click()
 
         // Await url change

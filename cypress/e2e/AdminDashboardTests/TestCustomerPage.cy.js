@@ -9,7 +9,8 @@ describe('Test Customer dashboard',()=>{
         //click customer button
      cy.get(':nth-child(3) > :nth-child(1) > a > .v-list-item > .v-list-item__content > .v-list-item-title').
         should('have.text','Customers').click()
-    
+
+     cy.wait(5000)
         cy.get('.table-header__content > .v-btn').
         should('have.text', ' add new customer ').click()
         cy.window().then((win)=>{
@@ -27,7 +28,7 @@ describe('Test Customer dashboard',()=>{
          //cancel the modal
          cy.get('body > div.v-overlay-container > div > div.v-overlay__content > div > div > div > div > div:nth-child(1) > div > div.d-flex.justify-space-between.mb-5 > span > i').click()
       })
-      
+
       //Display all customer email address
       it("Display all customer emails",()=>{
         //click customer button
@@ -39,9 +40,10 @@ describe('Test Customer dashboard',()=>{
         })
       }) 
        //display the address of the customer in the 3rd row
-      it.only('Display the address of a customer',()=>{
+      it('Display the address of a customer',()=>{
         cy.get(':nth-child(3) > :nth-child(1) > a > .v-list-item > .v-list-item__content > .v-list-item-title').
         should('have.text','Customers').click()
+        cy.wait(5000)
         cy.get('tbody > :nth-child(3) > :nth-child(4)').each(($cell) => {
             const cellValue = $cell.text();
             cy.log(cellValue);

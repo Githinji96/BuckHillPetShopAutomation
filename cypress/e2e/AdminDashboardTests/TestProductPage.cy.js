@@ -6,7 +6,7 @@ describe('Test Product dashboard', () => {
     });
    
     //get the product brand of the 4th row
-    it('Get a single row data', () => {
+    it('Display a single row data', () => {
         cy.get(':nth-child(4) > :nth-child(1) > a > .v-list-item > .v-list-item__content > .v-list-item-title').should('have.text', 'Products').click()
         cy.get(':nth-child(5) > :nth-child(3)').each(($cell) => {
             const cellValue = $cell.text();
@@ -31,9 +31,7 @@ describe('Test Product dashboard', () => {
         //click product type
         cy.get('body > div.v-overlay-container > div > div.v-overlay__content > div > div > div > div > div.v-col.v-col-8 > div > div:nth-child(1) > div > div > div > div.v-field__append-inner > i').click()
         cy.get('body > div.v-overlay-container > div.v-overlay.v-overlay--absolute.v-overlay--active.v-theme--PetGreen.v-locale--is-ltr.v-menu > div > div > div:nth-child(2) > div.v-list-item__content > div').click()
-        //Edit product name
-        cy.get('#input-33')
-            .clear().type('PetSafe')
+       
         //Edit product price
         cy.get('body > div.v-overlay-container > div > div.v-overlay__content > div > div > div > div > div.v-col.v-col-8 > div > div:nth-child(4) > div > div > div')
             .clear().type('45.00')

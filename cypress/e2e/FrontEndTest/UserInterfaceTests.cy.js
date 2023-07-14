@@ -54,8 +54,15 @@ describe('Ecommerce website', () => {
         });
       })
     })
+     it('Search products',()=>{
+      cy.get('#input-4').type(' Fresh Step Scented{enter}')
+      cy.get('.v-list-item').click()
+      cy.get('#__nuxt > div > div > nav > main > div > div > div > div > div.v-col.v-col-5 > div > p.product__title')
+      .should('have.text','Fresh Step Scented Litter with The Power of Febreze, Clumping Cat Litter')
+
+     })
     //The script randomly add to cart an item
-    it('add a single product to cart',()=>{
+    it('add a single product to cart randomly',()=>{
      
            cy.get('.product-card__title').then(($el) => {
 
@@ -116,5 +123,6 @@ describe('Ecommerce website', () => {
                 cy.get('.action-btns > .v-btn').click()
         })
     })
+   
   })
 

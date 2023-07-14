@@ -92,27 +92,27 @@ describe('Ecommerce website', () => {
                   cy.wait(5000)
                   //enter customer infomation
                   //Enter username
-                  cy.get('#input-39').type('John')
-                  cy.get('#input-41').type('Doe')
+                  cy.get('#input-34').type('John')
+                  cy.get('#input-36').type('Doe')
                   //enter Address
-                  cy.get('#input-43').type('Street 45')
-                  cy.get('#input-45').type('North 34')
-                  cy.get('#input-47').type('Nakuru')
-                  cy.get('#input-49').type('Monrovia')
-                  cy.get('#input-51').type('6000')
-                  cy.get('#input-53').type('Kenya')
+                  cy.get('#input-38').type('Street 45')
+                  cy.get('#input-40').type('North 34')
+                  cy.get('#input-42').type('Nakuru')
+                  cy.get('#input-44').type('Monrovia')
+                  cy.get('#input-46').type('6000')
+                  cy.get('#input-48').type('Kenya')
 
                   //click Next button
                   cy.get('.action-btns > .v-btn').should('have.text',' Next ').click()
                   //select the type of payment as cash on dilevery
                   cy.get(':nth-child(2) > .v-card').click()
                   cy.contains('Cash on delivery').should('be.visible')
-                  cy.get('#input-85').type('John')
-                  cy.get('#input-87').type('Doe')
-                  cy.get('#input-89').type('Street 45')
-                  cy.get('#input-91').type('0714597899')
+                  cy.get('#input-80').type('John')
+                  cy.get('#input-82').type('Doe')
+                  cy.get('#input-84').type('Street 45')
+                  cy.get('#input-86').type('0714597899')
                   //click checkbox
-                  cy.get('#checkbox-93').click()
+                  cy.get('#checkbox-88').click()
                   cy.get('.primary500').click()
 
                   // Review your order page

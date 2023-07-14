@@ -15,12 +15,6 @@
 Cypress.Commands.add('login', () => {
     cy.visit('https://pet-shop.buckhill.com.hr/')
 
-    cy.get('.ml-6').click();
-    cy.get('#input-10').type('Johndoe@gmail.com')
-    
-    cy.get('#input-12').type('Bg12345#')
-    cy.get('.login__form > .v-btn').click()
-    cy.url().should('eq','https://pet-shop.buckhill.com.hr/')
 });
    //custom command for admin login
  Cypress.Commands.add('adminLogin',()=>{

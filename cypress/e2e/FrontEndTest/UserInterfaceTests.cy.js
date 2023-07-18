@@ -3,12 +3,13 @@
 describe('Ecommerce website', () => {
   beforeEach(() => {
     // Call the custom login command
-    cy.login(); 
+    cy.visitUrl(); 
   });
   //display items and prices
   it('display of items on home page', () => {
-  
-    cy.get('.v-slide-group__content')
+  cy.get(':nth-child(3) > .section-title').click();
+  cy.get(':nth-child(2) > .accordion__body > ul > :nth-child(2)').click()
+    cy.get('.shop__products-wrapper > ')
         .each((product, index) => {
           // Access and print details of each product
           cy.wrap(product)
@@ -39,21 +40,21 @@ describe('Ecommerce website', () => {
       });
     })
 
-      //Filter the products based on the category
-    it('Filter products based on Category',()=>{
-        cy.get(':nth-child(3) > .section-title').click({force: true})
-        cy.wait(1000)
-        cy.get(':nth-child(3) > .accordion__body > ul > :nth-child(2)').click()
+    //   //Filter the products based on the category
+    // it('Filter products based on Category',()=>{
+    //     cy.get(':nth-child(3) > .section-title').click({force: true})
+    //     cy.wait(1000)
+    //     cy.get(':nth-child(3) > .accordion__body > ul > :nth-child(2)').click()
 
-        cy.get('.product-card__title').each(($product, index) => {
-          cy.wrap($product).invoke('text').then((productName) => {
-            cy.log(`Product ${index + 1}: ${productName}`);//print all products
-            expect(productName).to.not.be.empty; // Assertion to check product name is not empty
+    //     cy.get('.product-card__title').each(($product, index) => {
+    //       cy.wrap($product).invoke('text').then((productName) => {
+    //         cy.log(`Product ${index + 1}: ${productName}`);//print all products
+    //         expect(productName).to.not.be.empty; // Assertion to check product name is not empty
     
           
-        });
-      })
-    })
+    //     });
+    //   })
+
      it('Search products',()=>{
       cy.get('#input-4').type(' Fresh Step Scented{enter}')
       cy.get('.v-list-item').click()
@@ -63,7 +64,8 @@ describe('Ecommerce website', () => {
      })
     //The script randomly add to cart an item
     it('add a single product to cart randomly',()=>{
-     
+      cy.get(':nth-child(3) > .section-title').click();
+      cy.get(':nth-child(2) > .accordion__body > ul > :nth-child(2)').click()
            cy.get('.product-card__title').then(($el) => {
 
                 let i = Math.floor(Math.random() * ($el.toArray()).length)               
@@ -89,30 +91,33 @@ describe('Ecommerce website', () => {
                cy.contains('Shipping address').should('be.visible');
                   });
 
-                  cy.wait(5000)
                   //enter customer infomation
                   //Enter username
-                  cy.get('#input-34').type('John')
-                  cy.get('#input-36').type('Doe')
+                  cy.get('#input-59').type('John')
+                  cy.get('#input-61').type('Doe')
                   //enter Address
-                  cy.get('#input-38').type('Street 45')
-                  cy.get('#input-40').type('North 34')
-                  cy.get('#input-42').type('Nakuru')
-                  cy.get('#input-44').type('Monrovia')
-                  cy.get('#input-46').type('6000')
-                  cy.get('#input-48').type('Kenya')
+                  cy.get('#input-63').type('Street 45')
+                  cy.get('#input-65').type('North 34')
+                  cy.get('#input-67').type('Nakuru')
+                  cy.get('#input-69').type('Monrovia')
+                  cy.get('#input-71').type('6000')
+                  cy.get('#input-73').type('Kenya')
 
                   //click Next button
                   cy.get('.action-btns > .v-btn').should('have.text',' Next ').click()
                   //select the type of payment as cash on dilevery
                   cy.get(':nth-child(2) > .v-card').click()
                   cy.contains('Cash on delivery').should('be.visible')
-                  cy.get('#input-80').type('John')
-                  cy.get('#input-82').type('Doe')
-                  cy.get('#input-84').type('Street 45')
-                  cy.get('#input-86').type('0714597899')
+                  cy.get('#input-81').type('John')
+                  cy.get('#input-83').type('Doe')
+                  cy.get('#input-85').type('Street 45')
+                  cy.get('#input-87').type('0714597899')
+                  cy.get('#input-89').type('Atlanta')
+                  cy.get('#input-91').type('york')
+                  cy.get('#input-93').type('5000')
+                  cy.get('#input-95').type('street 67')
                   //click checkbox
-                  cy.get('#checkbox-88').click()
+                  cy.get('#checkbox-97').click()
                   cy.get('.primary500').click()
 
                   // Review your order page
@@ -123,6 +128,6 @@ describe('Ecommerce website', () => {
                 cy.get('.action-btns > .v-btn').click()
         })
     })
-   
   })
+  
 
